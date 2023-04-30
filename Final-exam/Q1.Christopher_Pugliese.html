@@ -1,0 +1,206 @@
+<!-- Name: Christopher Pugliese
+Mcgill email: Christopher.pugliese@mail.mcgill.ca
+ID: 261122300 -->
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="The best salespeople's earning calculations, thank me later!"
+      content=""
+    />
+    <meta name="Christopher Pugliese" content="" />
+
+    <title>Sign Up</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link href="styles/styles.css" rel="stylesheet" />
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="title-header">
+      <h2 id="section-title">Salespeople salary calculator</h2>
+      <h6 id="date">Date and time :</h6>
+    </div>
+
+    <div class="totalSalesSection">
+      <h2>Total sales calculation</h2>
+    </div>
+    <div class="form-div">
+      <form id="form">
+        <div class="">
+          <input
+            type="text"
+            class="form-control"
+            id="employeeName"
+            placeholder="Enter the employee full name"
+            name="uname"
+            pattern="/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+              "
+          />
+          <div class="invalid-feedback">
+            Please provide the employee's full name.
+          </div>
+        </div>
+        <fieldset>
+          <table>
+            <tr>
+              <th>Item</th>
+              <th>Value</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>239.99$</td>
+              <td>
+                <input
+                  id="quantity-item1"
+                  type="number"
+                  name="quantity-item1"
+                  min="0"
+                />
+              </td>
+              <td id="total1"></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>129.75$</td>
+              <td>
+                <input
+                  id="quantity-item2"
+                  type="number"
+                  name="quantity-item2"
+                  min="0"
+                />
+              </td>
+              <td id="total2"></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>99.95$</td>
+              <td>
+                <input
+                  id="quantity-item3"
+                  type="number"
+                  name="quantity-item3"
+                  min="0"
+                />
+              </td>
+              <td id="total3"></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>350.89$</td>
+              <td>
+                <input
+                  id="quantity-item4"
+                  type="number"
+                  name="quantity-item4"
+                  min="0"
+                />
+              </td>
+              <td id="total4"></td>
+            </tr>
+            <tr>
+              <td>Total sales:</td>
+              <td id="total-output"></td>
+            </tr>
+          </table>
+        </fieldset>
+        <fieldset style="border: none">
+          <table>
+            <tr>
+              <td>
+                <label for="commission-rate">Commission rate:</label>
+              </td>
+              <td>
+                <input id="commission-rate" value="0.09" />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="total-pay">Total earnings: </label>
+              </td>
+              <td id="total-pay"></td>
+            </tr>
+          </table>
+          <button class="submit">Submit sales report</button>
+        </fieldset>
+      </form>
+    </div>
+    <script>
+      const form = document.querySelector("form");
+
+      const quantityItem1 = document.getElementById("quantity-item1");
+      const quantityItem2 = document.getElementById("quantity-item2");
+      const quantityItem3 = document.getElementById("quantity-item3");
+      const quantityItem4 = document.getElementById("quantity-item4");
+
+      const total1 = document.getElementById("total1");
+      const total2 = document.getElementById("total2");
+      const total3 = document.getElementById("total3");
+      const total4 = document.getElementById("total4");
+      const totalOutput = document.getElementById("total-output");
+      const totalEarningsOutput = document.getElementById("total-pay");
+
+      const priceItem1 = "239.99";
+      const priceItem2 = "129.75";
+      const priceItem3 = "99.95";
+      const priceItem4 = "350.89";
+
+      let totalAmount = 0;
+
+      quantityItem1.addEventListener("input", updateTotal);
+      quantityItem2.addEventListener("input", updateTotal);
+      quantityItem3.addEventListener("input", updateTotal);
+      quantityItem4.addEventListener("input", updateTotal);
+
+      function updateTotal() {
+        const quantityValueItem1 = quantityItem1.value;
+        const quantityValueItem2 = quantityItem2.value;
+        const quantityValueItem3 = quantityItem3.value;
+        const quantityValueItem4 = quantityItem4.value;
+
+        const itemSubtotal1 = quantityValueItem1 * priceItem1;
+        const itemSubtotal2 = quantityValueItem2 * priceItem2;
+        const itemSubtotal3 = quantityValueItem3 * priceItem3;
+        const itemSubtotal4 = quantityValueItem4 * priceItem4;
+
+        const totalAmount =
+          itemSubtotal1 + itemSubtotal2 + itemSubtotal3 + itemSubtotal4;
+        const totalEarnings = totalAmount * 0.09 + 200;
+
+        total1.textContent = "$" + itemSubtotal1.toFixed(2);
+        total2.textContent = "$" + itemSubtotal2.toFixed(2);
+        total3.textContent = "$" + itemSubtotal3.toFixed(2);
+        total4.textContent = "$" + itemSubtotal4.toFixed(2);
+
+        totalOutput.textContent = "$" + totalAmount.toFixed(2);
+        totalEarningsOutput.textContent = "$" + totalEarnings.toFixed(2);
+      }
+      //adding an event listener so that if the form is not completed the right way
+      //the user will receive an error message, but only if the form is submitted with mistakes or missing required fields.
+      form.addEventListener("submit", (event) => {
+        //preventDefault function will prevent the form from being submitted, which is the default behavior that
+        //we would get if we didn't have this function.
+        event.preventDefault();
+        //validateForm function will be called to check if the form is valid or not.
+        //If the form is not valid, the user will receive an error message.
+        validateForm();
+      });
+
+      var employeeName = document.getElementById("employeeName");
+      employeeName.classList.add("is-invalid");
+    </script>
+  </body>
+</html>
